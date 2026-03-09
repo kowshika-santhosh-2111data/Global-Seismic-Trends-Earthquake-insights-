@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import queries
-from new_db_connection import engine
+
 
 @st.cache_data
 def load_data():
@@ -138,6 +138,7 @@ elif option == 'Regions with the highest frequency of deep-focus earthquakes (de
     st.subheader("Highest frequency of deep-focus earthquakes (depth > 300 km).")
     if st.button("Run Query",key="highest_deep_focus_freq"):
         st.dataframe(queries.df_highest_deep_focus_freq)
+
 
 
 
