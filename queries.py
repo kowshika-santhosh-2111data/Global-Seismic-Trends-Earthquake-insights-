@@ -1,19 +1,10 @@
 import pandas as pd
-import sqlalchemy
-from sqlalchemy import create_engine
+
 from urllib.parse import quote_plus
 from pprint import pprint
 from sqlalchemy import select,func,and_,desc,case,text
 password = quote_plus("Kowshika*1999")
-engine = sqlalchemy.create_engine(
-    f"mysql+pymysql://root:{password}@localhost/earthquake_db",echo = True)
 
-Connection = engine.connect()
-metadata = sqlalchemy.MetaData()
-earthquake = sqlalchemy.Table(
-    'earthquake',
-    metadata,
-    autoload_with=engine)
 #1.Strongest Earthquakes
 q1 = (
     select(
@@ -346,4 +337,5 @@ q30 =(
 df_highest_deep_focus_freq =   pd.read_sql(q30,engine)  
 
 print(df_highest_deep_focus_freq)
+
 
