@@ -5,8 +5,6 @@ from urllib.parse import quote_plus
 from pprint import pprint
 from sqlalchemy import select,func,and_,desc,case,text
 
-password = quote_plus("Kowshika*1999")
-
 engine = sqlalchemy.create_engine(
     f"mysql+pymysql://root:{password}@localhost/earthquake_db",echo = True)
 
@@ -346,4 +344,5 @@ q30 =(
     .order_by(func.count().desc())
 )
 df_highest_deep_focus_freq =   pd.read_sql(q30,engine)  
+
 print(df_highest_deep_focus_freq)
