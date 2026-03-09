@@ -9,7 +9,7 @@ def load_data():
         df = pd.read_sql("SELECT * FROM earthquake", connection)
     return df
 st.title("Earthquake Data Analysis Dashboard")
-df=pd.read_csv(r"C:\Users\Kowsh\OneDrive\Desktop\vscode_project\data\cleaned_earthquake_data.csv")
+df=pd.read_csv("cleaned_earthquake_data.csv")
 option = st.selectbox(
     'Select a query to execute:',
     ('Top 10 Strongest Earthquakes', 
@@ -138,5 +138,6 @@ elif option == 'Regions with the highest frequency of deep-focus earthquakes (de
     st.subheader("Highest frequency of deep-focus earthquakes (depth > 300 km).")
     if st.button("Run Query",key="highest_deep_focus_freq"):
         st.dataframe(queries.df_highest_deep_focus_freq)
+
 
 
