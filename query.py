@@ -64,8 +64,8 @@ def top_earthquakes_by_casualties():
 #    return df['estimated_economic_damage'].sum()
 
 def avg_economic_damage_by_alert_level():
-    avg_damage = df.groupby('alert_level')['estimated_economic_damage'].mean().reset_index()
-    return avg_damage.sort_values(by='estimated_economic_damage', ascending=False)
+    avg_damage = df.groupby('place')['sig'].mean().reset_index()
+    return avg_damage.sort_values(by='sig', ascending=False).head(10)
 
 #event type & quality metrics
 def status_counts():
@@ -167,6 +167,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
