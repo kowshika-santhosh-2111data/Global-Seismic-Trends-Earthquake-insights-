@@ -50,9 +50,9 @@ def count_of_earthquakes_per_hour():
     return hourly_counts.sort_values(by='count', ascending=False)
 
 def most_active_reporting_sources():
-    source_counts = df['reporting_source'].value_counts().reset_index()
-    source_counts.columns = ['reporting_source', 'count']
-    return source_counts.sort_values(by='count', ascending=False)
+    source_counts = df['place'].value_counts().reset_index()
+    source_counts.columns = ['place', 'count']
+    return source_counts
 
 #casualties and damage
 def top_earthquakes_by_casualties():
@@ -165,4 +165,5 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
