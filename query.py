@@ -79,8 +79,9 @@ def count_by_earthquake_type():
     return count
 
 def no_of_earthquakes_by_types():
-    return df['types'].value_counts().reset_index().rename(columns={'index': 'types', 'types': 'count'})
-
+    types_count = df['types'].value_counts().reset_index()
+    types_count.columns = ['types', 'count']
+    return types_count
 #def avg_rms_gap_per_continent():
 #    avg_rms_gap = df.groupby('place')['rms_gap'].mean().reset_index()
 #    return avg_rms_gap.sort_values(by='rms_gap', ascending=False)
@@ -177,6 +178,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
