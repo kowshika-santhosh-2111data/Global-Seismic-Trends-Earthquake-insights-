@@ -110,15 +110,16 @@ def top_country_avg_magnitude():
 
 def shallow_deep_month():
     temp = df.copy()
+    temp['year'] = pd.to_datetime(temp['time']).dt.year
     temp['month'] = pd.to_datetime(temp['time']).dt.month
-    result = temp.groupby(['place','month']).apply(
+    result = temp.groupby(['place','year','month']).apply(
         lambda x: pd.Series({
             'shallow': (x['depth_km'] < 70).sum(),
-            'deep': (x['depth_km'] > 300).sum()
+            'deep': (x['depth_km'] >= 300).sum()
         })
     ).reset_index()
     result = result[(result['shallow'] > 0) & (result['deep'] > 0)]
-    return result
+    return result[['place','year','month']]
     
 #def yoy_earthquake_count_change():
 #    df['year'] = pd.to_datetime(df['time']).dt.year
@@ -195,6 +196,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
