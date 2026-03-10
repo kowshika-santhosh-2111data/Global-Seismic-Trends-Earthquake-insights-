@@ -93,7 +93,7 @@ elif option == 'Number of earthquakes by data type':
 elif option == 'Events with high station coverage (nst > threshold)':
     st.subheader("High station coverage (nst > threshold)")
     if st.button("Run Query",key="high_station_coverage"):
-        st.dataframe(query.df_high_station_coverage())  
+        st.dataframe(query.high_station_coverage())  
 
 elif option == 'Number of tsunamis triggered per year':
     st.subheader("Number of tsunami's triggered per year")
@@ -144,6 +144,7 @@ elif option == 'Regions with the highest frequency of deep-focus earthquakes (de
     st.subheader("Highest frequency of deep-focus earthquakes (depth > 300 km).")
     if st.button("Run Query",key="highest_deep_focus_freq"):
         st.dataframe(query.high_frequency_depth_gt_300km())
+
 
 
 
