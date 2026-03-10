@@ -164,5 +164,4 @@ def high_frequency_depth_gt_300km():
     deep_earthquakes = df[df['depth_km'] > 300]
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
-
     return region_counts.sort_values(by='count', ascending=False)   
