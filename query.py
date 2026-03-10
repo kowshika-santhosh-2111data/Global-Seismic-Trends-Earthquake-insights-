@@ -69,7 +69,9 @@ def avg_economic_damage_by_alert_level():
 
 #event type & quality metrics
 def status_counts():
-    return df['status'].value_counts().reset_index().rename(columns={'index': 'status', 'status': 'count'})
+    status_counts = df['status'].value_counts().reset_index()
+    status_counts.columns = ['status', 'count']
+    return status_counts
 
 def count_by_earthquake_type():
     return df['type'].value_counts().reset_index().rename(columns={'index': 'type', 'type': 'count'})
@@ -167,6 +169,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
