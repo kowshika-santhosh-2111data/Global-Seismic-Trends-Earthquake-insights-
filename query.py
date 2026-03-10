@@ -130,16 +130,17 @@ def avg_depth_near_equator():
     return avg_depth.sort_values(by='depth_km', ascending=False)
 
 def shallow_deep_ratio_by_region():
-     temp = df.copy()
+    temp = df.copy()
     temp['month'] = pd.to_datetime(temp['time']).dt.month
-    grouped = temp.groupby(['place','month'])
-    result = grouped.apply(lambda x: pd.Series({
-        'shallow_count': (x['depth_km'] < 70).sum(),
-        'deep_count': (x['depth_km'] > 300).sum()
-    })).reset_index()
-    result = result[(result['shallow_count'] > 0) & (result['deep_count'] > 0)]
-    return result[['place','month','shallow_count','deep_count']]
-
+    result = temp.groupby(['place','month']).apply(
+        lambda x: pd.Series({
+            'shallow': (x['depth_km'] < 70).sum(),
+            'deep': (x['depth_km'] > 300).sum()
+        })
+    ).reset_index()
+    result = result[(result['shallow'] > 0) & (result['deep'] > 0)]
+    return result
+    
 def tsunami_alert_correlation():
     avg_mag_tsunami = df[df['tsunami'] == 1]['mag'].mean()
     avg_mag_no_tsunami = df[df['tsunami'] == 0]['mag'].mean()
@@ -187,6 +188,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
