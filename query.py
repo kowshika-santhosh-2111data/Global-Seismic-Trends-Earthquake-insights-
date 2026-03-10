@@ -109,7 +109,7 @@ def top_country_avg_magnitude():
     return avg_mag.sort_values(by='mag', ascending=False).head(5)
 
 def shallow_deep_month():
-     temp = df.copy()
+    temp = df.copy()
     temp['year'] = pd.to_datetime(temp['time']).dt.year
     temp['month'] = pd.to_datetime(temp['time']).dt.month
     g = temp.groupby(['place','year','month'])
@@ -191,6 +191,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
