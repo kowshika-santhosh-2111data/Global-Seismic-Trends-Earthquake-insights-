@@ -54,9 +54,10 @@ def most_active_reporting_sources():
     source_counts.columns = ['place', 'count']
     return source_counts
 
-#casualties and damage
-def top_earthquakes_by_casualties():
-    return df.sort_values(by='mag', ascending=False).head(5)
+#casualties and damagedef top_earthquakes_by_casualties():
+    high_casualties = df.groupby('place')['sig'].sum().reset_index()
+    high_casualties = high_casualties.sort_values(by='sig', ascending=False).head(5)
+    return high_casualties
 
 #def total_estimated_economic_damage():
 #    return df['estimated_economic_damage'].sum()
@@ -165,6 +166,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
