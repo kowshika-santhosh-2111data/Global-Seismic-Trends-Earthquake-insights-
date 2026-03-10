@@ -84,6 +84,12 @@ def no_of_earthquakes_by_types():
 #def avg_rms_gap_per_continent():
 #    avg_rms_gap = df.groupby('place')['rms_gap'].mean().reset_index()
 #    return avg_rms_gap.sort_values(by='rms_gap', ascending=False)
+#
+def high_station_coverage():
+    coverage = df[df['nst'] > 50]
+    coverage = coverage[['place','mag','depth_km','nst']]
+    coverage = coverage.sort_values(by='nst', ascending=False).head(50)
+    return coverage
 
 #tsunami & alerts
 def count_of_earthquakes_with_tsunami():
@@ -171,6 +177,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
