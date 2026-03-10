@@ -93,8 +93,9 @@ def high_station_coverage():
 #tsunami & alerts
 def count_of_earthquakes_with_tsunami():
     count = df[df['tsunami'] == 1].shape[0]
-    return pd.DataFrame({
+    result = pd.DataFrame({
         'Earthquakes with Tsunami':[count]})
+    return result
 
 def count_of_earthquakes_by_alert_level():
     return df['alert_level'].value_counts().reset_index().rename(columns={'index': 'alert_level', 'alert_level': 'count'})
@@ -191,6 +192,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
