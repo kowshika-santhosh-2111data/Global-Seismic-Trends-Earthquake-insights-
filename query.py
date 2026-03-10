@@ -144,11 +144,13 @@ def tsunami_alert_correlation():
     return tsunami_counts, alert_counts
 
 def high_avg_error_margin_by_region():
-    gap = df.groupby('place')['error_margin_km'].mean().reset_index()
-    rms = df.groupby('place')['rms_gap'].mean().reset_index()
-    avg_error_margin = pd.merge(gap, rms, on='place')
-    avg_error_margin['avg_error_margin'] = (avg_error_margin['error_margin_km'] + avg_error_margin['rms_gap']) / 2
-    return avg_error_margin.sort_values(by='avg_error_margin', ascending=False)
+    gap_avg = df.groupby('place')['gap'].mean().reset_index()
+    rms_avg = df.groupby('place')['rms'].mean().reset_index()
+
+    avg_error_margin = pd.merge(gap_avg, rms_avg, on='place')
+    avg_error_margin['avg_error_margin'] = (avg_error_margin['gap'] + avg_error_margin['rms']) / 2
+
+    return avg_error_margin.sort_values(by='avg_error_margin', ascending=False).head(10)
 
 # Find pairs of consecutive earthquakes (by time) that occurred within 50 km of each other and within 1 hour.
 #def find_consecutive_earthquakes():
@@ -178,6 +180,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
