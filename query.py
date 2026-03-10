@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Load the cleaned dataset
-df = pd.read_csv(r"C:\Users\Kowsh\OneDrive\Desktop\vscode_project\Global seismic earthquake data\data\cleaned_earthquake_data.csv")
+df = pd.read_csv("cleaned_earthquake_data.csv")
 
 #strongest earthquake
 def strongest_earthquake():
@@ -164,4 +164,5 @@ def high_frequency_depth_gt_300km():
     deep_earthquakes = df[df['depth_km'] > 300]
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
+
     return region_counts.sort_values(by='count', ascending=False)   
