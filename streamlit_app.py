@@ -133,9 +133,7 @@ elif option == 'Highest ratio of shallow to deep earthquakes by region':
 elif option == 'Average magnitude difference between earthquakes with tsunami alrets & those without':
     st.subheader("Average magnitude difference between earthquakes with tsunami alrets")
     if st.button("Run Query",key="avg_mag_diff_tsunami"):
-        tsunami, alert = query.tsunami_alert_correlation()
-        st.dataframe(tsunami)
-        st.dataframe(alert)
+        st.dataframe(query.tsunami_alert_correlation())
 
 elif option == 'Using the gap and rms columns, identify events with the lowest data reliability (highest average error margins).':
     st.subheader("Highest average error margins")
@@ -146,6 +144,7 @@ elif option == 'Regions with the highest frequency of deep-focus earthquakes (de
     st.subheader("Highest frequency of deep-focus earthquakes (depth > 300 km).")
     if st.button("Run Query",key="highest_deep_focus_freq"):
         st.dataframe(query.high_frequency_depth_gt_300km())
+
 
 
 
