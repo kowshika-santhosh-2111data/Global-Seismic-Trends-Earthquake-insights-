@@ -74,7 +74,9 @@ def status_counts():
     return status_counts
 
 def count_by_earthquake_type():
-    return df['type'].value_counts().reset_index().rename(columns={'index': 'type', 'type': 'count'})
+    count = df['type'].value_counts().reset_index()
+    count.columns = ['type','count']
+    return count
 
 def no_of_earthquakes_by_types():
     return df['types'].value_counts().reset_index().rename(columns={'index': 'types', 'types': 'count'})
@@ -169,6 +171,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
