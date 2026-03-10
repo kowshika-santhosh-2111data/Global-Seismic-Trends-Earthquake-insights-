@@ -138,9 +138,15 @@ def shallow_deep_ratio_by_region():
     return region_counts.sort_values(by='shallow_deep_ratio', ascending=False)
 
 def tsunami_alert_correlation():
-    tsunami_counts = df['tsunami'].value_counts().reset_index()
-    tsunami_counts.columns = ['tsunami', 'count']
-    return tsunami_counts
+    avg_mag_tsunami = df[df['tsunami'] == 1]['mag'].mean()
+    avg_mag_no_tsunami = df[df['tsunami'] == 0]['mag'].mean()
+    mag_differ = avg_mag_tsunami - avg_mag_no_tsunami
+    result = pd.DataFrame({
+        'avg_mag_tsunami': [avg_mag_tsunami],
+        'avg_mag_no_tsunami': [avg_mag_no_tsunami],
+        'mag_difference': [mag_differ]
+    })
+    return result
 
 def high_avg_error_margin_by_region():
     gap_avg = df.groupby('place')['gap'].mean().reset_index()
@@ -179,6 +185,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
