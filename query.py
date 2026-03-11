@@ -6,7 +6,7 @@ df = pd.read_csv("cleaned_earthquake_data.csv")
 #strongest earthquake
 def strongest_earthquake():
     strongest = df.sort_values(by = 'mag', ascending = False).head(10)
-    return df.loc[df['mag'].idxmax()]
+    return strongest
 
 def deepest_earthquake():
     deepest = df.sort_values(by='depth_km', ascending=False).head(10)
@@ -191,6 +191,7 @@ def high_frequency_depth_gt_300km():
     region_counts = deep_earthquakes['place'].value_counts().reset_index()
     region_counts.columns = ['place', 'count']
     return region_counts.sort_values(by='count', ascending=False)   
+
 
 
 
