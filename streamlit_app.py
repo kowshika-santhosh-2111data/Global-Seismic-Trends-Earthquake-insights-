@@ -110,11 +110,6 @@ elif option == 'Countries that experienced both shallow and deep earthquakes wit
     if st.button("Run Query",key="countries_shallow_deep"):
         st.dataframe(query.shallow_deep_month())
 
-elif option == 'Year over year growth rate in the total number of earthquakes globally':
-    st.subheader("Year over year growth rate percentage (yoy%)")
-    if st.button("Run Query",key="yoy_growth_earthquakes"):
-        st.dataframe(query.df_yoy_growth_earthquakes())
-
 elif option == 'Most 3 seismically active regions by combining both frequency& avg mag':
     st.subheader("Most 3 seismically active regions by combining both frequency& avg mag")
     if st.button("Run Query",key="most_active_regions"):
@@ -144,6 +139,7 @@ elif option == 'Regions with the highest frequency of deep-focus earthquakes (de
     st.subheader("Highest frequency of deep-focus earthquakes (depth > 300 km).")
     if st.button("Run Query",key="highest_deep_focus_freq"):
         st.dataframe(query.high_frequency_depth_gt_300km())
+
 
 
 
