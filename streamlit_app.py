@@ -23,7 +23,6 @@ option = st.selectbox(
     'Number of tsunamis triggered per year',
     'Top 5 countries with the highest average magnitude of earthquakes (past 10 years)',
     'Countries that experienced both shallow and deep earthquakes within same month',
-    'Year over year growth rate in the total number of earthquakes globally',
     'Most 3 seismically active regions by combining both frequency& avg mag',
     'Average depth of earthquakes within ±5° latitude and longitude of a given location',
     'Highest ratio of shallow to deep earthquakes by region',
@@ -139,6 +138,7 @@ elif option == 'Regions with the highest frequency of deep-focus earthquakes (de
     st.subheader("Highest frequency of deep-focus earthquakes (depth > 300 km).")
     if st.button("Run Query",key="highest_deep_focus_freq"):
         st.dataframe(query.high_frequency_depth_gt_300km())
+
 
 
 
