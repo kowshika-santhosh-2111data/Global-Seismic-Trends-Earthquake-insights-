@@ -60,9 +60,6 @@ def top_earthquakes_by_casualties():
     high_casualties = high_casualties.sort_values(by='sig', ascending=False).head(5)
     return high_casualties
     
-#def total_estimated_economic_damage():
-#    return df['estimated_economic_damage'].sum()
-
 def avg_economic_damage_by_alert_level():
     avg_damage = df.groupby('alert')['sig'].mean().reset_index()
     return avg_damage.sort_values(by='sig', ascending=False).head(10)
@@ -82,10 +79,7 @@ def no_of_earthquakes_by_types():
     types_count = df['types'].value_counts().reset_index()
     types_count.columns = ['types', 'count']
     return types_count
-#def avg_rms_gap_per_continent():
-#    avg_rms_gap = df.groupby('place')['rms_gap'].mean().reset_index()
-#    return avg_rms_gap.sort_values(by='rms_gap', ascending=False)
-#
+
 def high_station_coverage():
     result = df[df['nst'] > 50][['place','mag','depth_km','nst']]
     return result.sort_values(by='nst', ascending=False).head(50)
@@ -116,12 +110,6 @@ def shallow_deep_month():
     result = g.filter(lambda x: (x['depth_km'] < 70).any() and (x['depth_km'] >= 300).any())
     return result[['place','year','month']].drop_duplicates().sort_values(['year','month'])
     
-#def yoy_earthquake_count_change():
-#    df['year'] = pd.to_datetime(df['time']).dt.year
-#    yearly_counts = df.groupby('year').size().reset_index(name='count')
-#    yearly_counts['yoy_change'] = yearly_counts['count'].pct_change() * 100
-#    return yearly_counts.sort_values(by='yoy_change', ascending=False)
-
 def seismic_activity_by_region():
     region_counts = df.groupby('place').size().reset_index(name='count')
     return region_counts.sort_values(by='count', ascending=False).head(3)
@@ -162,29 +150,6 @@ def high_avg_error_margin_by_region():
     avg_error_margin['avg_error_margin'] = (avg_error_margin['gap'] + avg_error_margin['rms']) / 2
 
     return avg_error_margin.sort_values(by='avg_error_margin', ascending=False).head(10)
-
-# Find pairs of consecutive earthquakes (by time) that occurred within 50 km of each other and within 1 hour.
-#def find_consecutive_earthquakes():
-#    df['time'] = pd.to_datetime(df['time'])
-#    df = df.sort_values(by='time')
-#    df['prev_latitude'] = df['latitude'].shift(1)
-#    df['prev_longitude'] = df['longitude'].shift(1)
-#    df['prev_time'] = df['time'].shift(1)
-    
-#    def haversine(lat1, lon1, lat2, lon2):
-#        from math import radians, cos, sin, asin, sqrt
-#        R = 6371  # Earth radius in kilometers
-#        dlat = radians(lat2 - lat1)
-#        dlon = radians(lon2 - lon1)
-#        a = sin(dlat/2)**2 + cos(radians(lat1)) * cos(radians(lat2)) * sin(dlon/2)**2
-#        c = 2 * asin(sqrt(a))
-#        return R * c
-    
-#    df['distance_km'] = df.apply(lambda row: haversine(row['latitude'], row['longitude'], row['prev_latitude'], row['prev_longitude']), axis=1)
-#    df['time_diff_hours'] = (df['time'] - df['prev_time']).dt.total_seconds() / 3600
-    
-#    consecutive_earthquakes = df[(df['distance_km'] <= 50) & (df['time_diff_hours'] <= 1)]
-#    return consecutive_earthquakes[['id', 'place', 'time', 'latitude', 'longitude', 'distance_km', 'time_diff_hours']]
 
 def high_frequency_depth_gt_300km():
     deep_earthquakes = df[df['depth_km'] > 300]
